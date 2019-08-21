@@ -29,9 +29,11 @@ export default new Vuex.Store({
       }, 500);
     },
     'SET_FONT_COLOR'(state, { color }) {
+      console.log(color)
       state.settings.color = color;
     },
     'SET_FONT_FAMILY'(state, { font }) {
+      console.log(font)
       state.settings.font = font;
     },
     'GET_DATAS'(state, { settings, savedDogs }) {
