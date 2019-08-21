@@ -41,7 +41,7 @@
               >Seu cachorro</label>
               <div class="control">
                 <figure class="dog-info">
-                  <img class="rounded" :alt="selectedDog.breed" :src="selectedDog.image || require('@/assets/dog.jpg')" />
+                  <img class="rounded" :alt="selectedDog.breed" :src="selectedDog.image" />
                   <figcaption
                     class="preview_text"
                     :style="{ color: settings.color, 'font-family': settings.font }"
@@ -49,14 +49,18 @@
                 </figure>
               </div>
             </div>
-            <button class="button is-info is-fullwidth" :disabled='!selectedDog.image' @click="saveDog(selectedDog); selectedDog = {}">Salvar</button>
+            <button
+              class="button is-info is-fullwidth"
+              :disabled="!selectedDog.image"
+              @click="saveDog(selectedDog); selectedDog = {image: require('@/assets/dog.jpg')}"
+            >Salvar</button>
           </div>
           <div class="column">
             <figure class="saved-dog" v-for="dog in savedDogs" :key="dog.id">
               <img class="rounded" :src="dog.image" :alt="dog.type" />
               <figcaption :style="{ color: settings.color, 'font-family': settings.font }">
-                <p> {{ dog.name }} </p>
-                <p class="has-text-grey"> {{ new Date(dog.date).toLocaleString() }} </p>
+                <p>{{ dog.name }}</p>
+                <p class="has-text-grey">{{ new Date(dog.date).toLocaleString() }}</p>
               </figcaption>
               <a class="button is-danger" @click="deleteDog(dog.id)">Excluir</a>
             </figure>
@@ -82,7 +86,9 @@ export default {
   },
   data() {
     return {
-      selectedDog: {}
+      selectedDog: {
+        image: require("@/assets/dog.jpg")
+      }
     };
   },
   methods: {
@@ -94,14 +100,17 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.dog-info, .saved-dog {
+.dog-info,
+.saved-dog {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 1em;
 }
-.saved-dog, .dog-info {
-  img, figcaption {
+.saved-dog,
+.dog-info {
+  img,
+  figcaption {
     margin-right: 1em;
   }
 }
