@@ -18,3 +18,15 @@ h1 {
   font-size: 2rem;
   font-weight: bold;
 }
+
+.header {
+  padding: 1em;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  height: 80px;
+  widows: 80px;
+}

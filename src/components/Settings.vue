@@ -1,12 +1,27 @@
 <template>
   <div class="settings">
-    <div class="box cursor pointer config-box" @click="showColor = !showColor">
+    <div class="box cursor pointer config-box" @click="show = !show">
       <i class="fa fa-cog"></i>
     </div>
-    <div class="box select-color animated faster" :class="showColor ? 'fadeInUp' : 'fadeOutDown' ">
-      <h1>Cor da fonte:</h1>
-      <hr />
-      <Swatches :value="color" @input="changeColor" />
+    <div class="columns box font-config animated faster" :class="show ? 'fadeInUp' : 'fadeOutDown' ">
+      <div class="column">
+        <h1>Cor da fonte:</h1>
+        <hr />
+        <Swatches :value="color" @input="changeColor" />
+      </div>
+      <div class="column">
+        <h1>Tipo da fonte:</h1>
+        <hr />
+        <div class="select">
+          <select :value="font" @input="changeFont($event.target.value)">
+            <option value disabled selected>Selecione o tipo da fonte</option>
+            <option value="Arial">Arial</option>
+            <option value="Roboto">Roboto</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Times New Roman">Times New Roman</option>
+          </select>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -16,20 +31,25 @@ import { Swatches } from "vue-color";
 
 export default {
   props: {
-    color: { type: String, default: "#000000" }
+    color: { type: String, default: "#000000" },
+    font: {type: String, default: 'Arial'}
   },
   components: {
     Swatches
   },
   data() {
     return {
-      showColor: false
+      show: false
     };
   },
   methods: {
     changeColor(value) {
-      this.showColor = !this.showColor;
+      this.show = !this.show;
       this.$emit("changeColor", value.hex);
+    },
+    changeFont(value) {
+      this.show = !this.show;
+      this.$emit("changeFont", value);
     }
   }
 };
@@ -44,11 +64,14 @@ export default {
     bottom: 0;
     left: 1em;
   }
-  .select-color {
+  .font-config {
     width: max-content;
     position: fixed;
     top: 10em;
     left: 5em;
+    .select {
+      font-size: 1.2rem;
+    }
   }
 }
 </style>
