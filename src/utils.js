@@ -13,26 +13,13 @@ const localstorage = {
     window.localStorage.clear();
   }
 }
-const callback = (commit, response) => {
-  if (response.type == 'success') {
-    commit('LOADING');
-    commit('SUCCESS_MESSAGE', { response });
-    commit('PUSH_NOTIFICATION');
-    commit('SUCCESS');
-  } else {
-    commit('LOADING');
-    console.log('error', response)
-    commit('FAIL_MESSAGE', { response });
-    commit('PUSH_NOTIFICATION');
-  }
-}
 const verifyAndUpdateItemFromLocalStorage = (item, prop, value) => {
   let update = localstorage.get(item) || {};
   update[prop] = value;
   localstorage.set(item, update);
 }
+
 module.exports = {
   localstorage,
-  callback,
   verifyAndUpdateItemFromLocalStorage
 }

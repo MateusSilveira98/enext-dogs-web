@@ -3,7 +3,10 @@
     <div class="box cursor pointer config-box" @click="show = !show">
       <i class="fa fa-cog"></i>
     </div>
-    <div class="columns box font-config animated faster" :class="show ? 'fadeInUp' : 'fadeOutDown' ">
+    <div
+      class="columns box font-config animated faster"
+      :class="show ? 'fadeInUp' : 'fadeOutDown' "
+    >
       <div class="column">
         <h1>Cor da fonte:</h1>
         <hr />
@@ -32,7 +35,7 @@ import { Swatches } from "vue-color";
 export default {
   props: {
     color: { type: String, default: "#000000" },
-    font: {type: String, default: 'Arial'}
+    font: { type: String, default: "Arial" }
   },
   components: {
     Swatches
@@ -69,9 +72,31 @@ export default {
     position: fixed;
     top: 10em;
     left: 5em;
+    z-index: 10;
     .select {
       font-size: 1.2rem;
     }
+  }
+}
+@media (max-width: 480px) {
+  .settings {
+    .config-box,
+    .font-config {
+      left: 0;
+    }
+    .font-config {
+      top: 0;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .config-box,
+  .font-config {
+    left: 0;
+  }
+  .font-config {
+    top: 0;
   }
 }
 </style>
